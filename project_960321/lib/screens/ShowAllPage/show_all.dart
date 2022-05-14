@@ -1,16 +1,22 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:project_960321/constant.dart';
 
 class ShowAll extends StatefulWidget {
+  const ShowAll({Key? key, required this.name}) : super(key: key);
+  final String name;
   @override
-  State<ShowAll> createState() => _ShowAllState();
+  State<ShowAll> createState() => _ShowAllState(name: name);
 }
 
 class _ShowAllState extends State<ShowAll> {
+  String name;
+  _ShowAllState({required this.name});
   fetchMovies() async {
     var url;
-    url = await http.get("https://api.aniapi.com/v1/anime");
+    url = await http
+        .get(Uri.parse("https://api.aniapi.com/v1/anime?genres=$name"));
     return json.decode(url.body)['data']['documents'];
   }
 
@@ -21,8 +27,8 @@ class _ShowAllState extends State<ShowAll> {
       appBar: AppBar(
         centerTitle: false,
         title: Text(
-          'Anime',
-          style: TextStyle(fontSize: 25.0, color: Color(0xfff43370)),
+          name,
+          style: TextStyle(fontSize: 25.0, color: kPrimaryColor),
         ),
         elevation: 0.0,
         backgroundColor: Color(0xff191826),
@@ -31,9 +37,7 @@ class _ShowAllState extends State<ShowAll> {
           future: fetchMovies(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.hasError) {
-              return Center(
-                child: Text(snapshot.error),
-              );
+              return Text(snapshot.error.toString());
             }
             if (snapshot.hasData) {
               return ListView.builder(
