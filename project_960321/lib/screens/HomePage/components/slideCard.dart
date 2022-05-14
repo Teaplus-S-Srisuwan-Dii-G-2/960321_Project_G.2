@@ -40,7 +40,8 @@ class SlideCard extends StatelessWidget {
                           ["rj"],
                       img: snapshot.data["data"]["documents"][i]
                           ["cover_image"]);
-                });
+                },
+                itemCount: 5);
           } else if (snapshot.hasError) {
             return Text("${snapshot.error}");
           }

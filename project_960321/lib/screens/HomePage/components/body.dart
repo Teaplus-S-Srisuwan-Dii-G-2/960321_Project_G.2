@@ -17,11 +17,11 @@ class Body extends StatelessWidget {
       TitleHead(size: size),
       Trendind(
         size: size,
-        num: Random().nextInt(100),
+        num: Random().nextInt(99),
       ),
       Trendind(
         size: size,
-        num: Random().nextInt(100),
+        num: Random().nextInt(99),
       ),
       TextTitle(
         size: size,
