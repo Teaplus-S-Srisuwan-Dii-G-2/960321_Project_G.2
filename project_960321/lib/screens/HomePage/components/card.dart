@@ -53,7 +53,7 @@ class TitleCard extends StatelessWidget {
         padding: EdgeInsets.all(size.width * 0.05),
         height: 200,
         decoration: BoxDecoration(
-            color: Colors.grey,
+            color: kBackgroundColor,
             borderRadius: BorderRadius.circular(20),
             image: DecorationImage(
               image: NetworkImage(img),

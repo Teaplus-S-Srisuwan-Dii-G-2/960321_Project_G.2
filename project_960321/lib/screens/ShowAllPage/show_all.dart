@@ -24,7 +24,7 @@ class _ShowAllState extends State<ShowAll> {
   Widget build(BuildContext context) {
     int i = 0;
     return Scaffold(
-      backgroundColor: Color(0xff191826),
+      backgroundColor: kBackgroundColor,
       appBar: AppBar(
         centerTitle: false,
         title: Text(
@@ -32,7 +32,7 @@ class _ShowAllState extends State<ShowAll> {
           style: TextStyle(fontSize: 25.0, color: kPrimaryColor),
         ),
         elevation: 0.0,
-        backgroundColor: Color(0xff191826),
+        backgroundColor: kBackgroundColor,
       ),
       body: FutureBuilder(
           future: fetchMovies(),

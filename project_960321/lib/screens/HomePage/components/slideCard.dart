@@ -79,7 +79,7 @@ class MyBox extends StatelessWidget {
         height: 180,
         width: 150,
         decoration: BoxDecoration(
-            color: kPrimaryColor,
+            color: kBackgroundColor,
             borderRadius: BorderRadius.circular(20),
             image:
                 DecorationImage(image: NetworkImage(img), fit: BoxFit.cover)),
