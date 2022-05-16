@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:project_960321/constant.dart';
@@ -87,12 +88,18 @@ class MyBox extends StatelessWidget {
         decoration: BoxDecoration(
             color: kBackgroundColor,
             borderRadius: BorderRadius.circular(20),
-            image:
-                DecorationImage(image: NetworkImage(img), fit: BoxFit.cover)),
+            image:DecorationImage(image: NetworkImage(img), 
+              fit: BoxFit.cover,
+              colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.darken)),
+              boxShadow: [BoxShadow(
+                          offset: Offset(0, 5),
+                          blurRadius: 5,
+                          color: kPrimaryColor.withOpacity(0.23))
+                    ],),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Text(title, style: TextStyle(fontSize: 18, color: Colors.white))
+            AutoSizeText(title, style: TextStyle(fontSize: 18, color: Colors.white),maxLines: 1,)
           ],
         ),
       ),

@@ -29,6 +29,7 @@ class _detailState extends State<detail> {
 
   @override
   Widget build(BuildContext context) {
+    var myGroup = AutoSizeGroup();
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: kBackgroundColor,
@@ -75,9 +76,24 @@ class _detailState extends State<detail> {
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                                 maxLines: 1),
-                            Text(
+                            SizedBox(height: 10,),
+                            AutoSizeText(
                               "season_year : " +
                                   snapshot.data[index]['season_year']
+                                      .toString(),
+                                      textAlign: TextAlign.left,
+                              style: TextStyle(color: Color(0xff868597)),
+                            ),
+                            AutoSizeText(
+                              "start_date : " +
+                                  snapshot.data[index]['start_date']
+                                      .toString(),
+                                      textAlign: TextAlign.left,
+                              style: TextStyle(color: Color(0xff868597)),
+                            ),
+                            AutoSizeText(
+                              "end_date : " +
+                                  snapshot.data[index]['end_date']
                                       .toString(),
                                       textAlign: TextAlign.left,
                               style: TextStyle(color: Color(0xff868597)),
@@ -90,6 +106,7 @@ class _detailState extends State<detail> {
                             style: TextStyle(
                                 fontSize: 12, color: Color(0xff868597)),
                             maxLines: 6,
+                            group: myGroup,
                           ),
                         ),
                       ],

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:project_960321/constant.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 import '../../DetailPage/detailScreen.dart';
 
@@ -65,19 +66,25 @@ class TitleCard extends StatelessWidget {
             image: DecorationImage(
               image: NetworkImage(img),
               fit: BoxFit.fitHeight,
-            )),
+              colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.darken),),
+            boxShadow: [ BoxShadow(
+                          offset: Offset(0, 10),
+                          blurRadius: 50,
+                          color: kPrimaryColor.withOpacity(0.23))
+                    ],
+            ),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(
+              AutoSizeText(
                 title,
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
-                  backgroundColor: kBackgroundColor,
                 ),
+                maxLines: 1,
               ),
             ]),
       ),
