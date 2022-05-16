@@ -5,10 +5,12 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
 import '../../constant.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class detail extends StatefulWidget {
   const detail({Key? key, required this.id}) : super(key: key);
   final String id;
+
   @override
   State<detail> createState() => _detailState(id: id);
 }
@@ -23,12 +25,9 @@ class _detailState extends State<detail> {
     return json.decode(url.body)['data']['documents'];
   }
 
-  
-
-
   @override
   Widget build(BuildContext context) {
-    
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
@@ -52,28 +51,43 @@ class _detailState extends State<detail> {
                 itemCount: snapshot.data.length,
                 padding: EdgeInsets.all(20),
                 itemBuilder: (BuildContext context, int index) {
+                  String imgcov =
+                      snapshot.data[index]['cover_image'].toString();
                   return GestureDetector(
                     onTap: () {},
                     child: Column(
                       children: [
-                        Text(snapshot.data[index]["titles"]["rj"],
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 16)),
-                        Image.network(
-                              snapshot.data[index]['cover_image'],
-                              fit: BoxFit.fill,
-                            ),
-                            
-
-
-                        Text(
-                          "Year : " +
-                              snapshot.data[index]['season_year'].toString(),
-                          style: TextStyle(color: Color(0xff868597)),
+                        Container(
+                          width: size.width,
+                          child: Image.network(
+                            snapshot.data[index]['cover_image'],
+                            fit: BoxFit.fill,
+                          ),
                         ),
-                        Text(snapshot.data[index]["descriptions"]["en"],
+                        Container(
+                            child: Column(
+                          children: [
+                            AutoSizeText(snapshot.data[index]["titles"]["rj"],
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                                maxLines: 1),
+                            AutoSizeText(
+                              "Year : " +
+                                  snapshot.data[index]['season_year']
+                                      .toString(),
+                              style: TextStyle(color: Color(0xff868597)),
+                            ),
+                          ],
+                        )),
+                        Container(
+                          child: AutoSizeText(
+                            snapshot.data[index]["descriptions"]["en"],
                             style: TextStyle(
-                                fontSize: 12, color: Color(0xff868597))),
+                                fontSize: 12, color: Color(0xff868597)),
+                            maxLines: 6,
+                          ),
+                        ),
                       ],
                     ),
                   );
