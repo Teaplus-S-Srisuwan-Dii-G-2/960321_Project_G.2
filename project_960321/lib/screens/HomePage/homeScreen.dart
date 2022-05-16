@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_960321/constant.dart';
 import 'package:project_960321/screens/HomePage/components/body.dart';
+import 'package:project_960321/screens/SearchPage/SearchPage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,10 +20,10 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: Icon(Icons.search),
             tooltip: 'search',
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('This is a snackbar')));
-            },
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SearchPage()),
+            ),
           )
         ],
       ),
