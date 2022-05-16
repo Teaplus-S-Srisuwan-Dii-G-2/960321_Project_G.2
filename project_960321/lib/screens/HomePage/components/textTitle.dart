@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:project_960321/constant.dart';
 import 'package:project_960321/screens/ShowAllPage/show_all.dart';
@@ -21,31 +22,15 @@ class TextTitle extends StatelessWidget {
           Spacer(),
           Container(
               margin: EdgeInsets.only(right: size.width * 0.05),
-              child: FlatButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                            transitionDuration: Duration(milliseconds: 500),
-                            transitionsBuilder: (context, animation,
-                                secondaryAnimation, child) {
-                              animation = CurvedAnimation(
-                                  parent: animation, curve: Curves.easeInOut);
-                              return ScaleTransition(
-                                scale: animation,
-                                child: child,
-                              );
-                            },
-                            pageBuilder:
-                                (context, animation, secondaryAnimation) {
-                              return ShowAll(
-                                name: name,
-                              );
-                            }));
-                  },
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  child: Icon(Icons.arrow_forward_ios, color: kPrimaryColor)))
+              child: OpenContainer(
+                  transitionType: ContainerTransitionType.fade,
+                  transitionDuration: Duration(seconds: 1),
+                  openBuilder: (context, _) => ShowAll(name: name),
+                  closedElevation: 0,
+                  closedColor: kBackgroundColor,
+                  closedBuilder: (context, _) => Container(
+                      child:
+                          Icon(Icons.arrow_forward_ios, color: kPrimaryColor))))
         ],
       ),
     );
