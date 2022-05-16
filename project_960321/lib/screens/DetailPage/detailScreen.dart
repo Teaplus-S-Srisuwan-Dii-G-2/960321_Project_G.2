@@ -23,8 +23,12 @@ class _detailState extends State<detail> {
     return json.decode(url.body)['data']['documents'];
   }
 
+  
+
+
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
@@ -59,6 +63,9 @@ class _detailState extends State<detail> {
                               snapshot.data[index]['cover_image'],
                               fit: BoxFit.fill,
                             ),
+                            
+
+
                         Text(
                           "Year : " +
                               snapshot.data[index]['season_year'].toString(),

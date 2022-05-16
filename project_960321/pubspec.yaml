@@ -36,7 +36,6 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_slidable: ^1.2.0
   feedback: ^2.5.0
-  video_player: ^2.4.2
   animations: ^2.0.2
   auto_size_text: ^3.0.0
   http: ^0.13.4
