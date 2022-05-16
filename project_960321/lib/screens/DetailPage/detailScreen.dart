@@ -61,19 +61,29 @@ class _detailState extends State<detail> {
                       snapshot.data[index]['cover_image'].toString();
                   return GestureDetector(
                     onTap: () {},
-                    child: Column(
+                    child: Stack(
                       children: [
                         Container(
+                          alignment: Alignment.topCenter,  
                           width: size.width,
+                          height: size.height/2,
                           child: Image.network(
                             snapshot.data[index]['banner_image'],
                             fit: BoxFit.fill,
                           ),
                         ),
                         Container(
-                            alignment: Alignment.topLeft,
+                            alignment: Alignment.center,
+                            margin: const EdgeInsets.only(top: 40),
                             child: Column(
                               children: [
+                                Image.network(
+                            snapshot.data[index]['cover_image'],
+                            fit: BoxFit.fill,
+                          ),
+                          SizedBox(
+                                  height: 10,
+                                ),
                                 AutoSizeText(
                                     snapshot.data[index]["titles"]["rj"],
                                     style: TextStyle(
@@ -104,20 +114,28 @@ class _detailState extends State<detail> {
                                   textAlign: TextAlign.left,
                                   style: TextStyle(color: Color(0xff868597)),
                                 ),
+                                AutoSizeText(
+                                  "episode_duration : " +
+                                      snapshot.data[index]['episode_duration']
+                                          .toString(),
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(color: Color(0xff868597)),
+                                ),
+                                AutoSizeText(
+                                  snapshot.data[index]["descriptions"]["en"],
+                                  style: TextStyle(
+                                      fontSize: 12, color: Color(0xff868597)),
+                                  maxLines: 6,
+                                  group: myGroup,
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                VideoYoutubeNaja(
+                                  url: snapshot.data[index]["trailer_url"],
+                                )
                               ],
                             )),
-                        Container(
-                          child: AutoSizeText(
-                            snapshot.data[index]["descriptions"]["en"],
-                            style: TextStyle(
-                                fontSize: 12, color: Color(0xff868597)),
-                            maxLines: 6,
-                            group: myGroup,
-                          ),
-                        ),
-                        VideoYoutubeNaja(
-                          url: snapshot.data[index]["trailer_url"],
-                        )
                       ],
                     ),
                   );
