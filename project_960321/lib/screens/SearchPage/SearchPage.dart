@@ -44,19 +44,12 @@ class _SearchPageState extends State<SearchPage> {
             ),
           ),
           Container(
-              child: OutlineButton(
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => ShowSearch(name: search.text)),
-            ),
-            textColor: Colors.blue,
-            borderSide: BorderSide(
-                color: Colors.blue, width: 1.0, style: BorderStyle.solid),
-            child: Text(
-              'Search',
-            ),
-          ))
+            child:OutlinedButton(
+            child: Text('Search',), 
+   
+            onPressed: () { Navigator.push(context,MaterialPageRoute(builder: (context) => ShowSearch(name: search.text)));},
+            )          
+          )
         ],
       ),
       // backgroundColor: kBackgroundColor,
