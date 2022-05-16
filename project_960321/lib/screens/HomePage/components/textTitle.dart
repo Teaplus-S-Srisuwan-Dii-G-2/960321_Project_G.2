@@ -25,10 +25,23 @@ class TextTitle extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => ShowAll(
-                                  name: name,
-                                )));
+                        PageRouteBuilder(
+                            transitionDuration: Duration(milliseconds: 500),
+                            transitionsBuilder: (context, animation,
+                                secondaryAnimation, child) {
+                              animation = CurvedAnimation(
+                                  parent: animation, curve: Curves.easeInOut);
+                              return ScaleTransition(
+                                scale: animation,
+                                child: child,
+                              );
+                            },
+                            pageBuilder:
+                                (context, animation, secondaryAnimation) {
+                              return ShowAll(
+                                name: name,
+                              );
+                            }));
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20)),

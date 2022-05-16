@@ -40,7 +40,8 @@ class Trendind extends StatelessWidget {
 }
 
 class TitleCard extends StatelessWidget {
-  const TitleCard({Key? key, required this.title, required this.img, required this.id})
+  const TitleCard(
+      {Key? key, required this.title, required this.img, required this.id})
       : super(key: key);
 
   final String title;
@@ -53,7 +54,25 @@ class TitleCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         print("next page >>");
-            Navigator.push(context,MaterialPageRoute(builder: (context) => detail(id: id,name: title,)));
+        Navigator.push(
+            context,
+            PageRouteBuilder(
+                transitionDuration: Duration(milliseconds: 500),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                  animation = CurvedAnimation(
+                      parent: animation, curve: Curves.easeInOut);
+                  return ScaleTransition(
+                    scale: animation,
+                    child: child,
+                  );
+                },
+                pageBuilder: (context, animation, secondaryAnimation) {
+                  return detail(
+                    id: id,
+                    name: title,
+                  );
+                }));
       },
       child: Container(
         margin: EdgeInsets.all(size.width * 0.05),
