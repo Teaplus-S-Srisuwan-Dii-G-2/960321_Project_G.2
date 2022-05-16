@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:animations/animations.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:project_960321/constant.dart';
@@ -52,30 +53,13 @@ class TitleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return GestureDetector(
-      onTap: () {
-        print("next page >>");
-        Navigator.push(
-            context,
-            PageRouteBuilder(
-                transitionDuration: Duration(milliseconds: 500),
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, child) {
-                  animation = CurvedAnimation(
-                      parent: animation, curve: Curves.easeInOut);
-                  return ScaleTransition(
-                    scale: animation,
-                    child: child,
-                  );
-                },
-                pageBuilder: (context, animation, secondaryAnimation) {
-                  return detail(
-                    id: id,
-                    name: title,
-                  );
-                }));
-      },
-      child: Container(
+    return OpenContainer(
+      transitionType: ContainerTransitionType.fade,
+      transitionDuration: Duration(seconds: 1),
+      openBuilder: (context, _) => detail(id: id, name: title),
+      closedElevation: 0,
+      closedColor: kBackgroundColor,
+      closedBuilder: (context, _) => Container(
         margin: EdgeInsets.all(size.width * 0.05),
         padding: EdgeInsets.all(size.width * 0.05),
         height: 200,

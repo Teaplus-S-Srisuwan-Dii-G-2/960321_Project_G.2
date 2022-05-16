@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:animations/animations.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -49,12 +50,16 @@ class _ShowAllState extends State<ShowAll> {
                 itemCount: snapshot.data.length,
                 padding: EdgeInsets.all(20),
                 itemBuilder: (BuildContext context, int index) {
-                  return GestureDetector(
-                    onTap: () {
-        print("next page >>");
-            Navigator.push(context,MaterialPageRoute(builder: (context) => detail(id: snapshot.data[index]["anilist_id"].toString(),name: name,)));
-      },
-                    child: Row(
+                  return OpenContainer(
+                    transitionType: ContainerTransitionType.fade,
+                    transitionDuration: Duration(seconds: 1),
+                    openBuilder: (context, _) => detail(
+                      id: snapshot.data[index]["anilist_id"].toString(),
+                      name: name,
+                    ),
+                    closedElevation: 0,
+                    closedColor: kBackgroundColor,
+                    closedBuilder: (context, _) => Row(
                       children: [
                         Container(
                           height: 250,
@@ -79,7 +84,7 @@ class _ShowAllState extends State<ShowAll> {
                                   snapshot.data[index]["titles"]["rj"],
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 16),
-                                       maxLines: 1,
+                                  maxLines: 1,
                                 ),
                                 SizedBox(
                                   height: 10,

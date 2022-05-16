@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'dart:async';
 
 import '../../DetailPage/detailScreen.dart';
+import 'package:animations/animations.dart';
 
 Future<dynamic> fetchAnime(String type) async {
   final response =
@@ -72,52 +73,67 @@ class MyBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return GestureDetector(
-      onTap: () {
-        print("next page >>");
-        Navigator.push(
-            context,
-            PageRouteBuilder(
-                transitionDuration: Duration(milliseconds: 500),
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, child) {
-                  animation = CurvedAnimation(
-                      parent: animation, curve: Curves.easeInOut);
-                  return ScaleTransition(
-                    scale: animation,
-                    child: child,
-                  );
-                },
-                pageBuilder: (context, animation, secondaryAnimation) {
-                  return detail(
-                    id: id,
-                    name: title,
-                  );
-                }));
-      },
-      child: Container(
-        padding: EdgeInsets.all(20),
-        margin: EdgeInsets.only(left: size.width * 0.05),
-        height: 180,
-        width: 150,
-        decoration: BoxDecoration(
+    return Container(
+      margin: EdgeInsets.only(left: size.width * 0.05),
+      child: OpenContainer(
+        transitionType: ContainerTransitionType.fade,
+        transitionDuration: Duration(seconds: 1),
+        openBuilder: (context, _) => detail(id: id, name: title),
+        closedElevation: 0,
+        closedColor: kBackgroundColor,
+        closedBuilder: (context, _) => Container(
+          padding: EdgeInsets.all(20),
+          height: 180,
+          width: 150,
+          decoration: BoxDecoration(
             color: kBackgroundColor,
             borderRadius: BorderRadius.circular(20),
-            image:DecorationImage(image: NetworkImage(img), 
-              fit: BoxFit.cover,
-              colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.darken)),
-              boxShadow: [BoxShadow(
-                          offset: Offset(0, 5),
-                          blurRadius: 5,
-                          color: kPrimaryColor.withOpacity(0.23))
-                    ],),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            AutoSizeText(title, style: TextStyle(fontSize: 18, color: Colors.white),maxLines: 1,)
-          ],
+            image: DecorationImage(
+                image: NetworkImage(img),
+                fit: BoxFit.cover,
+                colorFilter: ColorFilter.mode(
+                    Colors.black.withOpacity(0.5), BlendMode.darken)),
+            boxShadow: [
+              BoxShadow(
+                  offset: Offset(0, 5),
+                  blurRadius: 5,
+                  color: kPrimaryColor.withOpacity(0.23))
+            ],
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              AutoSizeText(
+                title,
+                style: TextStyle(fontSize: 18, color: Colors.white),
+                maxLines: 1,
+              )
+            ],
+          ),
         ),
       ),
     );
   }
 }
+
+// GestureDetector(
+//           onTap: openContainer,
+//           child: Container(
+//             padding: EdgeInsets.all(20),
+//             margin: EdgeInsets.all(size.width * 0.05),
+//             height: 180,
+//             width: 150,
+//             decoration: BoxDecoration(
+//                 color: kBackgroundColor,
+//                 borderRadius: BorderRadius.circular(20),
+//                 image: DecorationImage(
+//                     image: NetworkImage(img), fit: BoxFit.cover)),
+//             child: Column(
+//               mainAxisAlignment: MainAxisAlignment.end,
+//               children: [
+//                 Text(title, style: TextStyle(fontSize: 18, color: Colors.white))
+//               ],
+//             ),
+//           ),
+
+          
