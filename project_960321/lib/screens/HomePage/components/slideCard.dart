@@ -4,6 +4,8 @@ import 'package:project_960321/constant.dart';
 import 'dart:convert';
 import 'dart:async';
 
+import '../../DetailPage/detailScreen.dart';
+
 Future<dynamic> fetchAnime(String type) async {
   final response =
       await http.get(Uri.parse('https://api.aniapi.com/v1/anime?genres=$type'));
@@ -71,7 +73,8 @@ class MyBox extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
-        print("Tap $title");
+        print("next page >>");
+            Navigator.push(context,MaterialPageRoute(builder: (context) => detail(name: title)));
       },
       child: Container(
         padding: EdgeInsets.all(20),

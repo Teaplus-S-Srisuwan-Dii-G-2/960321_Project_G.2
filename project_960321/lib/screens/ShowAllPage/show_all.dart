@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:project_960321/constant.dart';
 
+import '../DetailPage/detailScreen.dart';
+
 class ShowAll extends StatefulWidget {
   const ShowAll({Key? key, required this.name}) : super(key: key);
   final String name;
@@ -48,8 +50,9 @@ class _ShowAllState extends State<ShowAll> {
                 itemBuilder: (BuildContext context, int index) {
                   return GestureDetector(
                     onTap: () {
-                      print(i++);
-                    },
+        print("next page >>");
+            Navigator.push(context,MaterialPageRoute(builder: (context) => detail(name: snapshot.data[index]["titles"]["rj"])));
+      },
                     child: Row(
                       children: [
                         Container(

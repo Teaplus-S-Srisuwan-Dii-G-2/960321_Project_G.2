@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:project_960321/constant.dart';
 
+import '../../DetailPage/detailScreen.dart';
+
 class Trendind extends StatelessWidget {
   const Trendind({Key? key, required this.size, required this.num})
       : super(key: key);
@@ -47,7 +49,10 @@ class TitleCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        print("next page >>");
+            Navigator.push(context,MaterialPageRoute(builder: (context) => detail(name: title)));
+      },
       child: Container(
         margin: EdgeInsets.all(size.width * 0.05),
         padding: EdgeInsets.all(size.width * 0.05),
