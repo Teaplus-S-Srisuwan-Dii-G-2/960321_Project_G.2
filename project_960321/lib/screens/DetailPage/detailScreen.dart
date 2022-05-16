@@ -7,39 +7,76 @@ import 'package:http/http.dart' as http;
 import '../../constant.dart';
 
 class detail extends StatefulWidget {
-  const detail({Key? key, required this.name}) : super(key: key);
-  final String name;
+  const detail({Key? key, required this.id}) : super(key: key);
+  final String id;
   @override
-  State<detail> createState() => _detailState(name: name);
+  State<detail> createState() => _detailState(id: id);
 }
 
 class _detailState extends State<detail> {
- String name;
- _detailState({required this.name});
- fechdetail() async {
-   var url;
-   url = await http.get(Uri.parse("https://api.aniapi.com/v1/anime?anilist_id=5114"));
-   return json.decode(url.body);
- }
-  
-  
- @override
+  String id;
+  _detailState({required this.id});
+  fechdetail() async {
+    var url;
+    url = await http
+        .get(Uri.parse("https://api.aniapi.com/v1/anime?anilist_id=$id"));
+    return json.decode(url.body)['data']['documents'];
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kBackgroundColor,
       appBar: AppBar(
         centerTitle: false,
         title: Text(
-          name,
+          id,
           style: TextStyle(fontSize: 25.0, color: kPrimaryColor),
         ),
         elevation: 0.0,
         backgroundColor: kBackgroundColor,
       ),
-      body:  Center(child: Column(children: [Container(
-        child: Text(name),
-      )]),
-        
-      ),
+      body: FutureBuilder(
+          future: fechdetail(),
+          builder: (BuildContext cotext, AsyncSnapshot snapshot) {
+            if (snapshot.hasError) {
+              return Text(snapshot.error.toString());
+            }
+            if (snapshot.hasData) {
+              return ListView.builder(
+                shrinkWrap: true,
+                itemCount: snapshot.data.length,
+                padding: EdgeInsets.all(20),
+                itemBuilder: (BuildContext context, int index) {
+                  return GestureDetector(
+                    onTap: () {},
+                    child: Column(
+                      children: [
+                        Text(snapshot.data[index]["titles"]["rj"],
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 16)),
+                        Image.network(
+                              snapshot.data[index]['cover_image'],
+                              fit: BoxFit.fill,
+                            ),
+                        Text(
+                          "Year : " +
+                              snapshot.data[index]['season_year'].toString(),
+                          style: TextStyle(color: Color(0xff868597)),
+                        ),
+                        Text(snapshot.data[index]["descriptions"]["en"],
+                            style: TextStyle(
+                                fontSize: 12, color: Color(0xff868597))),
+                      ],
+                    ),
+                  );
+                },
+              );
+            }
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }),
     );
   }
 }

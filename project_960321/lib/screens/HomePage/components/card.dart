@@ -23,7 +23,8 @@ class Trendind extends StatelessWidget {
           }
           return TitleCard(
               title: snapshot.data[num1]["titles"]["rj"],
-              img: snapshot.data[num1]['banner_image']);
+              img: snapshot.data[num1]['banner_image'],
+              id: snapshot.data[num1]['anilist_id'].toString());
         } else if (snapshot.hasError) {
           return Text("${snapshot.error}");
         }
@@ -39,11 +40,12 @@ class Trendind extends StatelessWidget {
 }
 
 class TitleCard extends StatelessWidget {
-  const TitleCard({Key? key, required this.title, required this.img})
+  const TitleCard({Key? key, required this.title, required this.img, required this.id})
       : super(key: key);
 
   final String title;
   final String img;
+  final String id;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +53,7 @@ class TitleCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         print("next page >>");
-            Navigator.push(context,MaterialPageRoute(builder: (context) => detail(name: title)));
+            Navigator.push(context,MaterialPageRoute(builder: (context) => detail(id: id)));
       },
       child: Container(
         margin: EdgeInsets.all(size.width * 0.05),

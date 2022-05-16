@@ -41,7 +41,8 @@ class SlideCard extends StatelessWidget {
                       title: snapshot.data["data"]["documents"][i]["titles"]
                           ["rj"],
                       img: snapshot.data["data"]["documents"][i]
-                          ["cover_image"]);
+                          ["cover_image"],
+                      id: snapshot.data["data"]["documents"][i]["anilist_id"].toString());
                 },
                 itemCount: 5);
           } else if (snapshot.hasError) {
@@ -64,17 +65,19 @@ class MyBox extends StatelessWidget {
     Key? key,
     required this.title,
     required this.img,
+    required this.id
   }) : super(key: key);
 
   final String title;
   final String img;
+  final String id;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
         print("next page >>");
-            Navigator.push(context,MaterialPageRoute(builder: (context) => detail(name: title)));
+            Navigator.push(context,MaterialPageRoute(builder: (context) => detail(id: id)));
       },
       child: Container(
         padding: EdgeInsets.all(20),
