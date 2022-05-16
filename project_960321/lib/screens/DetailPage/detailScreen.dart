@@ -8,16 +8,18 @@ import '../../constant.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
 class detail extends StatefulWidget {
-  const detail({Key? key, required this.id}) : super(key: key);
+  const detail({Key? key, required this.id, required this.name}) : super(key: key);
   final String id;
+  final String name;
 
   @override
-  State<detail> createState() => _detailState(id: id);
+  State<detail> createState() => _detailState(id: id,name: name);
 }
 
 class _detailState extends State<detail> {
   String id;
-  _detailState({required this.id});
+  String name;
+  _detailState({required this.id,required this.name});
   fechdetail() async {
     var url;
     url = await http
@@ -33,7 +35,7 @@ class _detailState extends State<detail> {
       appBar: AppBar(
         centerTitle: false,
         title: Text(
-          id,
+          name,
           style: TextStyle(fontSize: 25.0, color: kPrimaryColor),
         ),
         elevation: 0.0,
@@ -60,11 +62,12 @@ class _detailState extends State<detail> {
                         Container(
                           width: size.width,
                           child: Image.network(
-                            snapshot.data[index]['cover_image'],
+                            snapshot.data[index]['banner_image'],
                             fit: BoxFit.fill,
                           ),
                         ),
                         Container(
+                          alignment: Alignment.topLeft,
                             child: Column(
                           children: [
                             AutoSizeText(snapshot.data[index]["titles"]["rj"],
@@ -72,10 +75,11 @@ class _detailState extends State<detail> {
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                                 maxLines: 1),
-                            AutoSizeText(
-                              "Year : " +
+                            Text(
+                              "season_year : " +
                                   snapshot.data[index]['season_year']
                                       .toString(),
+                                      textAlign: TextAlign.left,
                               style: TextStyle(color: Color(0xff868597)),
                             ),
                           ],

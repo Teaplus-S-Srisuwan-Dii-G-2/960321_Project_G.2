@@ -53,7 +53,7 @@ class TitleCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         print("next page >>");
-            Navigator.push(context,MaterialPageRoute(builder: (context) => detail(id: id)));
+            Navigator.push(context,MaterialPageRoute(builder: (context) => detail(id: id,name: title,)));
       },
       child: Container(
         margin: EdgeInsets.all(size.width * 0.05),

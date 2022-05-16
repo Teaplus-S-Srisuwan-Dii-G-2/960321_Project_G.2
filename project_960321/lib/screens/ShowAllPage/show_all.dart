@@ -51,7 +51,7 @@ class _ShowAllState extends State<ShowAll> {
                   return GestureDetector(
                     onTap: () {
         print("next page >>");
-            Navigator.push(context,MaterialPageRoute(builder: (context) => detail(id: snapshot.data[index]["anilist_id"].toString())));
+            Navigator.push(context,MaterialPageRoute(builder: (context) => detail(id: snapshot.data[index]["anilist_id"].toString(),name: name,)));
       },
                     child: Row(
                       children: [
