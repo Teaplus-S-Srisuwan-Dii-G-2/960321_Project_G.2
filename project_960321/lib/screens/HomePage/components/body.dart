@@ -23,22 +23,43 @@ class Body extends StatelessWidget {
         size: size,
         num: Random().nextInt(99),
       ),
-      TextTitle(
-        size: size,
-        name: "Action",
+      Container(
+        child: Column(children: [
+          TextTitle(
+            size: size,
+            name: "Action",
+          ),
+          SlideCard(
+            size: size,
+            type: "Action",
+          ),
+        ]),
       ),
-      SlideCard(
-        size: size,
-        type: "Action",
+      Container(
+        child: Column(children: [
+          TextTitle(
+            size: size,
+            name: "School",
+          ),
+          SlideCard(
+            size: size,
+            type: "School",
+          ),
+        ]),
       ),
-      TextTitle(
-        size: size,
-        name: "School",
-      ),
-      SlideCard(
-        size: size,
-        type: "School",
-      ),
+      Container(
+          child: Column(
+        children: [
+          TextTitle(
+            size: size,
+            name: "Astronomy",
+          ),
+          SlideCard(
+            size: size,
+            type: "Astronomy",
+          ),
+        ],
+      )),
     ]);
   }
 }

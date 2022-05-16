@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:animations/animations.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:project_960321/constant.dart';
@@ -79,10 +80,11 @@ class _ShowAllState extends State<ShowAll> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                Text(
+                                AutoSizeText(
                                   snapshot.data[index]["titles"]["rj"],
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 16),
+                                  maxLines: 1,
                                 ),
                                 SizedBox(
                                   height: 10,
